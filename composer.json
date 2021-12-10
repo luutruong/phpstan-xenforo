@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.2"
+    }
+}

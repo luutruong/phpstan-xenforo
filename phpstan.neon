@@ -1,0 +1,31 @@
+parameters:
+  ignoreErrors:
+    - '#^Method (.+)::action([a-zA-Z0-9]+)\(\) has no return type specified#'
+    - '#^Method (.+)Setup::(upgrade|install|uninstall)([0-9]+)?Step([0-9]+)\(\) has no return type specified#'
+    - '#^Parameter \#2 \$indexName of method XF\\Db\\Schema\\AbstractDdl::addKey\(\) expects null, string given.#'
+    - '#^Method (.+)::(_postDelete|_preSave|_postSave)\(\) has no return type specified.#'
+    - '#^Access to an undefined property XF\\Api\\Result\\EntityResult::.+#'
+    - '#^Parameter \#2 \$type of method XF\\Mvc\\Controller::filter\(\) expects string\|null, array<string, string> given#'
+  excludePaths:
+    - */vendor/*
+    - */_output/*
+    - */_files/*
+  universalObjectCratesClasses:
+    - XF\Mvc\ParameterBag
+    - ArrayObject
+  bootstrapFiles:
+    - autoload.php
+  fileExtensions:
+    - php
+  parallel:
+    maximumNumberOfProcesses: 1
+  phpVersion: 80100 # PHP 8.1.0
+  checkFunctionNameCase: true
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false
+
+services:
+  -
+    class: App\Reflection\PropertiesClass
+    tags:
+      - phpstan.broker.propertiesClassReflectionExtension
