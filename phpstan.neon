@@ -1,9 +1,11 @@
 parameters:
+  reportUnmatchedIgnoredErrors: false
+
   ignoreErrors:
     - '#^Method (.+)::action([a-zA-Z0-9]+)\(\) has no return type specified#'
     - '#^Method (.+)Setup::(upgrade|install|uninstall)([0-9]+)?Step([0-9]+)\(\) has no return type specified#'
-    - '#^Parameter \#2 \$indexName of method XF\\Db\\Schema\\AbstractDdl::addKey\(\) expects null, string given.#'
-    - '#^Method (.+)::(_postDelete|_preDelete|_preSave|_postSave)\(\) has no return type specified.#'
+    - '#^Parameter \#2 \$indexName of method XF\\Db\\Schema\\AbstractDdl::addKey\(\) expects null, string given#'
+    - '#^Method (.+)::(_postDelete|_preDelete|_preSave|_postSave)\(\) has no return type specified#'
     - '#^Access to an undefined property XF\\Api\\Result\\EntityResult::.+#'
     - '#^Parameter \#2 \$type of method XF\\Mvc\\Controller::filter\(\) expects string\|null, array<string, string> given#'
     - '#^Parameter \#1 \$categories of method XF\\Repository\\AbstractCategoryTree::createCategoryTree\(\) expects null#'
