@@ -30,7 +30,7 @@ fi
 
 export PHPSTAN_XENFORO_ROOT_DIR="$1"
 
-exec vendor/bin/phpstan analyse \
+exec "$_dir/vendor/bin/phpstan" analyse \
   --level 6 \
   --configuration "$_config" \
   --error-format table \
