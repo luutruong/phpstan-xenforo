@@ -6,6 +6,7 @@ parameters:
     - '#^Method (.+)::(_postDelete|_preSave|_postSave)\(\) has no return type specified.#'
     - '#^Access to an undefined property XF\\Api\\Result\\EntityResult::.+#'
     - '#^Parameter \#2 \$type of method XF\\Mvc\\Controller::filter\(\) expects string\|null, array<string, string> given#'
+    - '#^Parameter \#1 \$categories of method XF\\Repository\\AbstractCategoryTree::createCategoryTree\(\) expects null#'
   excludePaths:
     - */vendor/*
     - */_output/*
