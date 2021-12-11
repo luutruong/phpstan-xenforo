@@ -31,8 +31,8 @@ fi
 export PHPSTAN_XENFORO_ROOT_DIR="$1"
 
 exec "$_dir/vendor/bin/phpstan" analyse \
-  --level 6 \
-  --configuration "$_config" \
-  --error-format table \
-  --memory-limit 512M \
+  --level=6 \
+  --configuration="$_config" \
+  --error-format=table \
+  --memory-limit=-1 \
   "$_xfDir/src/addons/$_addOnId"
