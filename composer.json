@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "phpstan/phpstan": "^1.2"
+        "phpstan/phpstan": "^1.2",
+        "nikic/php-parser": "^4.13"
     }
 }
