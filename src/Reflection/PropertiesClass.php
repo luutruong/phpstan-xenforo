@@ -5,6 +5,7 @@ namespace App\Reflection;
 use App\Type\EntityColumnReflection;
 use App\Type\EntityGetterReflection;
 use App\Type\EntityRelationReflection;
+use PHPStan\Reflection\ClassReflection;
 use XF\Mvc\Entity\Structure;
 
 class PropertiesClass
@@ -14,7 +15,7 @@ class PropertiesClass
      */
     protected static $xfStructures = [];
 
-    public function hasProperty($classReflection, $propertyName)
+    public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
         $structure = $this->getStructure($classReflection);
         if ($structure !== null) {
@@ -34,7 +35,7 @@ class PropertiesClass
         return false;
     }
 
-    public function getProperty($classReflection, string $propertyName)
+    public function getProperty(ClassReflection $classReflection, string $propertyName)
     {
         $structure = $this->getStructure($classReflection);
         if ($structure === null) {
@@ -90,7 +91,7 @@ class PropertiesClass
         throw new \PHPStan\ShouldNotHappenException();
     }
 
-    public function getStructure($classReflection): ?Structure
+    public function getStructure(ClassReflection $classReflection): ?Structure
     {
         if ($classReflection->isSubclassOf('XF\Mvc\Entity\Entity')) {
             if (isset(static::$xfStructures[$classReflection->getName()])) {

@@ -3,7 +3,6 @@
 namespace App\Type;
 
 use XF\Mvc\Entity\Entity;
-use PHP\Type\MixedType;
 
 class EntityColumnReflection implements \PHPStan\Reflection\PropertyReflection
 {
@@ -67,6 +66,13 @@ class EntityColumnReflection implements \PHPStan\Reflection\PropertyReflection
             case Entity::SERIALIZED:
                 return new \PHPStan\Type\MixedType();
             case Entity::JSON_ARRAY:
+                return new \PHPStan\Type\UnionType([
+                    new \PHPStan\Type\NullType(),
+                    new \PHPStan\Type\ArrayType(
+                        new \PHPStan\Type\MixedType(),
+                        new \PHPStan\Type\MixedType()
+                    )
+                ]);
             case Entity::LIST_COMMA:
             case Entity::LIST_LINES:
             case Entity::LIST_ARRAY:
