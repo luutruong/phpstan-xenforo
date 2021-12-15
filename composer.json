@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "phpstan/phpstan": "^1.2"
+        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan-strict-rules": "^1.1"
     }
 }
