@@ -52,7 +52,7 @@ $table->setHeaders([
    'phrase',
    'line'
 ]);
-$notFoundTotal = 0;
+$notFound = 0;
 
 foreach ($templates as $type => $template) {
     $progressBar->advance();
@@ -73,8 +73,10 @@ foreach ($templates as $type => $template) {
 
         /** @var \XF\Entity\Phrase|null $phrase */
         $phrase = $phraseFinder->fetchOne();
-        if ($phrase === null) {
-            $notFoundTotal++;
+        if ($phrase === null
+            || !in_array($phrase->addon_id, ['', 'XF', $_SERVER['PHPSTAN_XENFORO_ADDON_ID']], true)
+        ) {
+            $notFound++;
 
             $table->addRow([
                 $parts[0],
@@ -89,9 +91,9 @@ foreach ($templates as $type => $template) {
 $progressBar->finish();
 $console->writeln('');
 
-if ($notFoundTotal > 0) {
+if ($notFound > 0) {
     $table->render();
-    $console->writeln('<error>UNKNOWN ' . $notFoundTotal . ' PHRASE(S)</error>');
+    $console->writeln('<error>UNKNOWN ' . $notFound . ' PHRASE(S)</error>');
 }
 
 $timing = microtime(true) - $start;
@@ -116,4 +118,4 @@ function find_phrase_used_in_line(string $phraseId, string $content): string {
     return implode(',', $found);
 }
 
-exit($notFoundTotal);
+exit($notFound);

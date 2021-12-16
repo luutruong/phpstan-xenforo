@@ -51,7 +51,9 @@ class Phrase implements \PHPStan\Rules\Rule
             $phraseId = $this->normalizePhrase($phraseId);
             $phrase = $this->fetchPhrase($phraseId);
 
-            if ($phrase !== null) {
+            if ($phrase !== null
+                && in_array($phrase->addon_id, ['', 'XF', $_SERVER['PHPSTAN_XENFORO_ADDON_ID']], true)
+            ) {
                 return [];
             }
         }
