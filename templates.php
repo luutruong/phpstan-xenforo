@@ -89,9 +89,8 @@ foreach ($templates as $type => $template) {
 $progressBar->finish();
 $console->writeln('');
 
-$table->render();
-
 if ($notFoundTotal > 0) {
+    $table->render();
     $console->writeln('<error>UNKNOWN ' . $notFoundTotal . ' PHRASE(S)</error>');
 }
 
