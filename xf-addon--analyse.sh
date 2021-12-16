@@ -29,10 +29,14 @@ if [[ -f "$_xfDir/src/addons/$_addOnId/_files/dev/phpstan.neon" ]]; then
 fi
 
 export PHPSTAN_XENFORO_ROOT_DIR="$1"
+export PHPSTAN_XENFORO_ADDON_ID="$2"
+
+php templates.php
 
 exec "$_dir/vendor/bin/phpstan" analyse \
   --level=6 \
   --configuration="$_config" \
   --error-format=table \
   --memory-limit=-1 \
+  "${@:3}" \
   "$_xfDir/src/addons/$_addOnId"
