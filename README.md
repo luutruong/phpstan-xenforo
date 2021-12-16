@@ -2,6 +2,9 @@
 
 Automatically analyse add-ons to find potential bugs.
 
+- Analyse PHP codes
+- Analyse phrases to prevent missing phrases
+
 ## Installation
 
 Clone this repo to your local.
