@@ -31,7 +31,7 @@ fi
 export PHPSTAN_XENFORO_ROOT_DIR="$1"
 export PHPSTAN_XENFORO_ADDON_ID="$2"
 
-php templates.php
+php "$_dir/templates.php"
 
 exec "$_dir/vendor/bin/phpstan" analyse \
   --level=6 \
