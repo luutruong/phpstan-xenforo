@@ -36,3 +36,5 @@ services:
     class: App\Reflection\PropertiesClass
     tags:
       - phpstan.broker.propertiesClassReflectionExtension
+rules:
+  - App\Rule\Phrase
