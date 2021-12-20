@@ -81,7 +81,11 @@ foreach ($templates as $type => $template) {
             $table->addRow([
                 $parts[0],
                 $parts[1],
-                $phraseId,
+                sprintf(
+                    "%s\n(Add-on: %s)",
+                    $phraseId,
+                    $phrase->addon_id
+                ),
                 find_phrase_used_in_line($phraseId, $template)
             ]);
         }
@@ -93,7 +97,7 @@ $console->writeln('');
 
 if ($notFound > 0) {
     $table->render();
-    $console->writeln('<error>UNKNOWN ' . $notFound . ' PHRASE(S)</error>');
+    $console->writeln('<error>UNKNOWN ' . $notFound . ' PHRASE(s)</error>');
 }
 
 $timing = microtime(true) - $start;
