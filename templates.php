@@ -53,6 +53,7 @@ $table->setHeaders([
    'line'
 ]);
 $notFound = 0;
+$warnings = [];
 
 foreach ($templates as $type => $template) {
     $progressBar->advance();
@@ -73,21 +74,23 @@ foreach ($templates as $type => $template) {
 
         /** @var \XF\Entity\Phrase|null $phrase */
         $phrase = $phraseFinder->fetchOne();
-        if ($phrase === null
-            || !in_array($phrase->addon_id, ['', 'XF', $_SERVER['PHPSTAN_XENFORO_ADDON_ID']], true)
-        ) {
+        if ($phrase === null) {
             $notFound++;
 
             $table->addRow([
                 $parts[0],
                 $parts[1],
-                sprintf(
-                    "%s\n(Add-on: %s)",
-                    $phraseId,
-                    $phrase->addon_id
-                ),
+                $phraseId,
                 find_phrase_used_in_line($phraseId, $template)
             ]);
+        } elseif (!in_array($phrase->addon_id, ['', 'XF', $_SERVER['PHPSTAN_XENFORO_ADDON_ID']], true)) {
+            $warnings[] = [
+                $parts[0],
+                $parts[1],
+                $phraseId,
+                $phrase->addon_id,
+                find_phrase_used_in_line($phraseId, $template)
+            ];
         }
     }
 }
@@ -98,6 +101,21 @@ $console->writeln('');
 if ($notFound > 0) {
     $table->render();
     $console->writeln('<error>UNKNOWN ' . $notFound . ' PHRASE(s)</error>');
+}
+
+if (count($warnings) > 0) {
+    $console->writeln('<info>Add-on used phrases from another add-ons.</info>');
+    $warningTable = clone $table;
+    $warningTable->setHeaders([
+        'type',
+        'template',
+        'phrase',
+        'add-on',
+        'lines'
+    ]);
+    $warningTable->addRows($warnings);
+    $warningTable->render();
+    $console->writeln('');
 }
 
 $timing = microtime(true) - $start;
