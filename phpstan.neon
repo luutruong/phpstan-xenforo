@@ -12,6 +12,8 @@ parameters:
     - '#^Access to an undefined property XF\\Api\\Result\\EntityResult::.+#'
     - '#^Parameter \#2 \$type of method XF\\Mvc\\Controller::filter\(\) expects string\|null, array<string, string> given#'
     - '#^Parameter \#1 \$categories of method XF\\Repository\\AbstractCategoryTree::createCategoryTree\(\) expects null#'
+    - '#^Return type (.+) of method .+::getPurchaseFromRequest\(\) should be covariant with return type \(XF\\Purchasable\\Purchase\) of method XF\\Purchasable\\AbstractPurchasable::getPurchaseFromRequest\(\)#'
+    - '#^Return type (.+) of method .+::getPurchaseFromExtraData\(\) should be covariant with return type \(XF\\Purchasable\\Purchase\) of method XF\\Purchasable\\AbstractPurchasable::getPurchaseFromExtraData\(\)#'
   excludePaths:
     - */vendor/*
     - */_output/*
@@ -19,6 +21,7 @@ parameters:
   universalObjectCratesClasses:
     - XF\Mvc\ParameterBag
     - ArrayObject
+    - XF\Payment\CallbackState
   bootstrapFiles:
     - autoload.php
   fileExtensions:
